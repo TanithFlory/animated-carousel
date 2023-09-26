@@ -1,8 +1,5 @@
 "use client";
-
-import { useState, useEffect } from "react";
-import gsap from "gsap";
-import Flip from "gsap/dist/Flip";
+import { useState } from "react";
 import CarouselControls from "./CarouselControls";
 import SliderCard from "./SliderCard";
 import { sliderData as rawData } from "./slider-data";
