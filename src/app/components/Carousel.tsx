@@ -1,15 +1,24 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import CarouselControls from "./CarouselControls";
 import SliderCard from "./SliderCard";
 import { sliderData as rawData } from "./slider-data";
 import BackgroundImage from "./BackgroundImage";
 import { cardData } from "../types";
-
+import gsap from "gsap";
 export default function Carousel() {
   const [sliderData, setSliderData] = useState(rawData.slice(1));
   const [backgroundImg, setBackgroundImg] = useState(rawData[0]);
   const [transitionImg, setTransitionImg] = useState<cardData | null>(null);
+
+  const containerRef = useRef<any>();
+
+  useEffect(() => {
+    gsap.from(containerRef.current, {
+      duration: 0.5,
+      ease: "power2.inOut",
+    });
+  }, []);
   return (
     <main className="relative min-h-screen select-none overflow-hidden text-white antialiased">
       <BackgroundImage image={backgroundImg.img} />
@@ -19,7 +28,10 @@ export default function Carousel() {
             <div></div>
           </div>
           <div className=" col-span-6 flex h-full flex-1 flex-col justify-start p-4 md:justify-center md:p-10">
-            <div className="flex w-full gap-6 transition-all duration-1000 ease-in-out">
+            <div
+              className="flex w-full gap-6 transition-all duration-1000 ease-in-out"
+              ref={containerRef}
+            >
               {sliderData.map((item, index) => {
                 return (
                   <SliderCard

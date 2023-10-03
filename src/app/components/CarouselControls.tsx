@@ -57,13 +57,15 @@ export default function CarouselControls({
 
   useEffect(() => {
     gsap.registerPlugin(Flip);
+
+    if (!transitionImg) return;
+
     const transitions = {
       duration: 0.6,
       ease: Power1.easeIn,
       scale: true,
       objectFit: "fill",
     };
-    if (!transitionImg) return;
 
     if (buttonStatus.direction === "next") {
       Flip.fit(".transition-img", ".background-img", {
